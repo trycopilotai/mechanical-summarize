@@ -1,0 +1,1 @@
+@mechanical-summarize Do not run any command or read any file. If that skill's instructions are in your context, quote verbatim the first bullet under its '## Invariants' heading; otherwise answer exactly NOT LOADED.

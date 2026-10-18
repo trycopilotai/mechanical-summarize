@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "release": "v0.1.0",
+  "input_commit": "9fbc1971111654d6b77be542a71feef7db15c6e2",
+  "skill": {
+    "path": "skills/mechanical-summarize/SKILL.md",
+    "sha256": "2bc46c24c1ed58800915dd34775a32fcf3cdc2e5a1436e50707c3177b4cab943"
+  },
+  "programs": [
+    {
+      "path": "skills/mechanical-summarize/scripts/verify_reduction.py",
+      "sha256": "5efbcaa4a4f677fcff5d4e16b76939cf067f79459727850e6cd723e91e229dce"
+    }
+  ],
+  "input": {
+    "path": "examples/weekly-update.md",
+    "sha256": "c96ae61c9fb8c6ce4761941b81deb9fdba63840f57bf67c7380a71aa9a783f4a",
+    "provenance": "synthetic"
+  },
+  "retain": "0.5",
+  "agent": {
+    "invoked_the_skill": true,
+    "note": "The two transcripts are agent sessions that invoked the skill once each to do the work. Four further Codex sessions, under codex_plugin_forms, only checked which invocation forms load the skill. No other session produced evidence for this release."
+  },
+  "edited": true,
+  "edit_note": "The transcripts are rendered from the clients' raw JSON-lines output, which is not committed, plus each run's prompt file, which the raw output does not echo. The only edits are the replacements listed per run; each tool-call argument is cut at 4000 characters and each tool result at 1500. The outputs, prompts, and version files are committed byte for byte.",
+  "invocations": [
+    {
+      "id": "claude-code",
+      "product": "Claude Code",
+      "version": "2.1.302 (Claude Code)",
+      "version_file": {
+        "path": "evidence/runs/claude-code/version.txt",
+        "sha256": "46456e3df7072c3a1af6131cd577e05b22296c630b3e7a4a60be70a7c3a5d896",
+        "note": "the client's --version output, captured just before the run"
+      },
+      "prompt_file": {
+        "path": "evidence/runs/claude-code/prompt.txt",
+        "sha256": "e09160fee9869fcf582b6d5bd60d9d899ab50d00cfcec72f791ff2d39d293120",
+        "note": "the exact request passed to the client; the renderer prints it under == prompt =="
+      },
+      "model": "claude-opus-5-5",
+      "started_at": "2026-10-18T06:09:04Z",
+      "started_note": "both clients were started together, in parallel",
+      "invocation": "/mechanical-summarize:mechanical-summarize Create a 50% deletion-only copy of weekly-update.md in this directory. Leave weekly-update.md unchanged.",
+      "loaded_through": "--plugin-dir pointing at an exact export of the input commit; claude -p --output-format stream-json --verbose --permission-mode acceptEdits --add-dir /tmp --allowedTools with Bash prefixes for python3, wc, cat, ls, diff, sed, head, tail, grep, mktemp, and rm of /tmp/tmp.* paths. Commands outside that list (cp, sha256sum, cmp, echo) also ran; the event stream does not record what allowed them, and the maintainer's user-level hooks were active. Three compound commands were refused.",
+      "allowed_tools": [
+        "Bash(python3:*)",
+        "Bash(wc:*)",
+        "Bash(cat:*)",
+        "Bash(ls:*)",
+        "Bash(diff:*)",
+        "Bash(sed:*)",
+        "Bash(head:*)",
+        "Bash(tail:*)",
+        "Bash(grep:*)",
+        "Bash(mktemp:*)",
+        "Bash(rm -rf /tmp/tmp.:*)",
+        "Bash(rm -r /tmp/tmp.:*)"
+      ],
+      "raw_output_sha256": "532d983a8ad6c243ed95558b8f6e78657c1708b6afb1439aedaa64fca7ebb23c",
+      "renderer": {
+        "path": "scripts/render_invocation.py",
+        "sha256": "5121b4076745e5afa7aaf83a82eecfd5a3a8092bb44319fed31489b581b7bd05"
+      },
+      "transforms": [
+        {
+          "name": "replace-plugin-root",
+          "with": "/plugin",
+          "note": "the fresh directory holding an exact export of the input commit, loaded through --plugin-dir"
+        },
+        {
+          "name": "replace-run-directory",
+          "with": "/work",
+          "note": "the fresh directory the client ran in, with no AGENTS.md or CLAUDE.md in any parent"
+        },
+        {
+          "name": "replace-file-owner",
+          "with": "user user",
+          "note": "the operator's user and group names in ls -la listings"
+        },
+        {
+          "name": "mask-mktemp-suffix",
+          "with": "/tmp/tmp.XXXXXXXXXX",
+          "note": "the random suffix of the temporary directory mktemp -d created"
+        }
+      ],
+      "transcript": {
+        "path": "evidence/transcripts/claude-code-invocation.txt",
+        "sha256": "3cc68b236949569a0311d469a2daa5469e857156848646d8e1af07f40ecb6b23",
+        "edited": true
+      },
+      "output": {
+        "path": "evidence/outputs/claude-code/weekly-update.50per.md",
+        "sha256": "bf8539256c0ec58930ffbe62724b3c0d94d15681574b6dcdc0efb178232efaba",
+        "edited": false
+      },
+      "source_after_run_sha256": "c96ae61c9fb8c6ce4761941b81deb9fdba63840f57bf67c7380a71aa9a783f4a",
+      "run_directory_after": [
+        "weekly-update.50per.md",
+        "weekly-update.md"
+      ]
+    },
+    {
+      "id": "codex",
+      "product": "Codex",
+      "version": "codex-cli 0.163.0",
+      "version_file": {
+        "path": "evidence/runs/codex/version.txt",
+        "sha256": "15c9db57c80035537f94bea647d07608a1fab5148f5482c0a0d1d7422b7fb69e",
+        "note": "the client's --version output, captured just before the run"
+      },
+      "prompt_file": {
+        "path": "evidence/runs/codex/prompt.txt",
+        "sha256": "57ee1b4145ce59e3d3fe3f9097faa1095bbd27abc9d66a33a02829013e412647",
+        "note": "the exact request passed to the client; the renderer prints it under == prompt =="
+      },
+      "model": "not recorded: Codex's event stream does not name the model",
+      "started_at": "2026-10-18T06:09:04Z",
+      "started_note": "both clients were started together, in parallel",
+      "invocation": "Use $mechanical-summarize to create a 50% deletion-only copy of weekly-update.md in this directory. Leave weekly-update.md unchanged.",
+      "loaded_through": "a copy of skills/mechanical-summarize at the input commit in the fixture's .agents/skills/mechanical-summarize; codex exec --json -s workspace-write",
+      "raw_output_sha256": "f4d947f7512999d2a86cb8b45fc98b99bd8a8dbf2f171c553ad8e0a6bfa23318",
+      "renderer": {
+        "path": "scripts/render_invocation.py",
+        "sha256": "5121b4076745e5afa7aaf83a82eecfd5a3a8092bb44319fed31489b581b7bd05"
+      },
+      "transforms": [
+        {
+          "name": "drop-sandbox-placeholder-aws",
+          "with": "",
+          "note": "an empty read-only .aws placeholder that the Codex sandbox mounts in the workspace, removed from one ls -la listing"
+        },
+        {
+          "name": "drop-sandbox-placeholder-codex",
+          "with": "",
+          "note": "an empty read-only .codex placeholder that the Codex sandbox mounts in the workspace, removed from one ls -la listing"
+        },
+        {
+          "name": "replace-run-directory",
+          "with": "/work",
+          "note": "the fresh directory the client ran in, an empty git repository with no AGENTS.md or CLAUDE.md in any parent"
+        },
+        {
+          "name": "replace-file-owner",
+          "with": "user user",
+          "note": "the operator's user and group names in ls -la listings"
+        },
+        {
+          "name": "mask-mkdtemp-suffix",
+          "with": "/tmp/weekly-reduction-XXXXXXXX",
+          "note": "the random suffix of the temporary directory Python's tempfile.mkdtemp created"
+        }
+      ],
+      "transcript": {
+        "path": "evidence/transcripts/codex-invocation.txt",
+        "sha256": "00778d35db58f4f7c80245fb449cd6e3408e6542797a92c70d6059840b743db9",
+        "edited": true
+      },
+      "output": {
+        "path": "evidence/outputs/codex/weekly-update.50per.md",
+        "sha256": "021ba9de149dcf65118ecba3b82c57e960e96ff6412b2faba30d63b154bda9dd",
+        "edited": false
+      },
+      "source_after_run_sha256": "c96ae61c9fb8c6ce4761941b81deb9fdba63840f57bf67c7380a71aa9a783f4a",
+      "run_directory_after": [
+        ".agents/skills/mechanical-summarize/SKILL.md",
+        ".agents/skills/mechanical-summarize/agents/openai.yaml",
+        ".agents/skills/mechanical-summarize/references/method.md",
+        ".agents/skills/mechanical-summarize/scripts/verify_reduction.py",
+        "weekly-update.50per.md",
+        "weekly-update.md"
+      ]
+    }
+  ],
+  "codex_plugin_forms": {
+    "version": "codex-cli 0.163.0",
+    "version_file": {
+      "path": "evidence/codex-plugin-forms/version.txt",
+      "sha256": "15c9db57c80035537f94bea647d07608a1fab5148f5482c0a0d1d7422b7fb69e"
+    },
+    "setup": "a throwaway CODEX_HOME; probe 0 ran before any plugin was installed; then codex plugin marketplace add on a local marketplace whose plugin held exactly the files in plugin_files, and codex plugin add; codex exec --json -s read-only --ephemeral --skip-git-repo-check -o <answer file>, one session per probe, each told to run no command and read no file",
+    "plugin_files": [
+      {
+        "path": ".codex-plugin/plugin.json",
+        "sha256": "62723a13b1ec68e860887236704d56b002ce1d9e6d1733f153a8a9918ff3bf18"
+      },
+      {
+        "path": "skills/mechanical-summarize/SKILL.md",
+        "sha256": "2bc46c24c1ed58800915dd34775a32fcf3cdc2e5a1436e50707c3177b4cab943"
+      },
+      {
+        "path": "skills/mechanical-summarize/agents/openai.yaml",
+        "sha256": "9bc2dbf9061ef7568e4ebce718c5ede3dce862a25127a0d905947b5e5728e090"
+      },
+      {
+        "path": "skills/mechanical-summarize/references/method.md",
+        "sha256": "e8f18625ae8db9c8fff1936850af54085f15dde9a59d1c60c7d6940030ff12ec"
+      },
+      {
+        "path": "skills/mechanical-summarize/scripts/verify_reduction.py",
+        "sha256": "5efbcaa4a4f677fcff5d4e16b76939cf067f79459727850e6cd723e91e229dce"
+      }
+    ],
+    "plugin_files_record": {
+      "path": "evidence/codex-plugin-forms/plugin-files.sha256",
+      "sha256": "24031894ff5b1383b56a756e6a4b2b41981be63ea467df425dd97b7b29fff9ce"
+    },
+    "probes": [
+      {
+        "number": 0,
+        "plugin_installed": false,
+        "form": "$mechanical-summarize:mechanical-summarize",
+        "loaded": false,
+        "commands_run": 0,
+        "prompt": {
+          "path": "evidence/codex-plugin-forms/0.prompt.txt",
+          "sha256": "50bc6268bb13c7ec57642b21a5a91ac0e56a2438325f0a2bbe6346a862860f03"
+        },
+        "answer": {
+          "path": "evidence/codex-plugin-forms/0.answer.txt",
+          "sha256": "6debef80ca0f7cc2ddb5fb616612a72f89497ac70390b2a9cba1a9bd4b545e03"
+        }
+      },
+      {
+        "number": 1,
+        "plugin_installed": true,
+        "form": "$mechanical-summarize",
+        "loaded": false,
+        "commands_run": 0,
+        "prompt": {
+          "path": "evidence/codex-plugin-forms/1.prompt.txt",
+          "sha256": "aa1a2946f0243ce8bb2f73b88af15facf3713a0c75048a27244991ceba0b2e30"
+        },
+        "answer": {
+          "path": "evidence/codex-plugin-forms/1.answer.txt",
+          "sha256": "6debef80ca0f7cc2ddb5fb616612a72f89497ac70390b2a9cba1a9bd4b545e03"
+        }
+      },
+      {
+        "number": 2,
+        "plugin_installed": true,
+        "form": "$mechanical-summarize:mechanical-summarize",
+        "loaded": true,
+        "commands_run": 0,
+        "prompt": {
+          "path": "evidence/codex-plugin-forms/2.prompt.txt",
+          "sha256": "50bc6268bb13c7ec57642b21a5a91ac0e56a2438325f0a2bbe6346a862860f03"
+        },
+        "answer": {
+          "path": "evidence/codex-plugin-forms/2.answer.txt",
+          "sha256": "512ab558731ed5895bc73b9f59ef84daf3d503b85f063035249af9fc26b21712"
+        }
+      },
+      {
+        "number": 3,
+        "plugin_installed": true,
+        "form": "@mechanical-summarize",
+        "loaded": false,
+        "commands_run": 0,
+        "prompt": {
+          "path": "evidence/codex-plugin-forms/3.prompt.txt",
+          "sha256": "25f407df0e6a6e80aa7bfbd8490bf77b4d1b0ecf0c3806f26aace74222e61e2d"
+        },
+        "answer": {
+          "path": "evidence/codex-plugin-forms/3.answer.txt",
+          "sha256": "6debef80ca0f7cc2ddb5fb616612a72f89497ac70390b2a9cba1a9bd4b545e03"
+        }
+      }
+    ]
+  }
+}

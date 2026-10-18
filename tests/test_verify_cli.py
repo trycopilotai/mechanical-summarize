@@ -99,6 +99,34 @@ class VerifyCliTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout)
         self.assertEqual(report(result.stdout)["candidate_words"], "6")
 
+    def test_added_symbols_are_unchecked(self) -> None:
+        """A documented limit: only letters and digits are matched."""
+        candidate = self.write("copy.txt", "We shipped it, but it is $not > a full fix.\n")
+
+        result = run("verify", self.source, candidate, "--retain", "0.5")
+
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertEqual(report(result.stdout)["valid"], "True")
+
+    def test_contraction_is_one_token(self) -> None:
+        """A documented limit: a copy cannot cut it's to it."""
+        source = self.write("contraction.txt", "it's fine today\n")
+        candidate = self.write("cut.txt", "it fine\n")
+
+        result = run("verify", source, candidate, "--retain", "0.5")
+
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(report(result.stdout)["missing_candidate_token"], "it")
+
+    def test_straight_and_curly_apostrophes_differ(self) -> None:
+        source = self.write("curly.txt", "don’t stop now\n")
+        candidate = self.write("straight.txt", "don't stop now\n")
+
+        result = run("verify", source, candidate, "--retain", "0.5")
+
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(report(result.stdout)["missing_candidate_token"], "don't")
+
     def test_copy_below_floor_exits_one(self) -> None:
         candidate = self.write("copy.txt", "We shipped it.\n")
 

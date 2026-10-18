@@ -1,0 +1,1 @@
+/mechanical-summarize:mechanical-summarize Create a 50% deletion-only copy of weekly-update.md in this directory. Leave weekly-update.md unchanged.
