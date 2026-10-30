@@ -5,6 +5,7 @@ check:
 	@$(PYTHON) tests/test_verify_reduction.py
 	@$(PYTHON) tests/test_verify_cli.py
 	@$(PYTHON) tests/test_integrations.py
+	@$(PYTHON) tests/test_readme_badges.py
 
 assets:
 	@$(PYTHON) assets/build.py
