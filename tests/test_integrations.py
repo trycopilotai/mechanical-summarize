@@ -275,7 +275,8 @@ class ReadmeTest(unittest.TestCase):
                 report["candidate_words"],
                 report["retained_percent"],
             )
-            self.assertIn(row, README)
+            squeeze = lambda value: " ".join(value.split())
+            self.assertIn(squeeze(row), squeeze(README))
 
     def test_docs(self):
         self.assertTrue((ROOT / "LICENSE").read_text().startswith("MIT License"))
