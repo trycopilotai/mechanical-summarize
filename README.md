@@ -25,8 +25,8 @@ number of words.
 The demo is reconstructed from the evidence, not screen
 recorded. [`assets/build.py`](assets/build.py) draws it from
 the synthetic input
-[`examples/weekly-update.md`](examples/weekly-update.md), the
-copy Claude Code wrote,
+[`examples/weekly-update.md`](examples/weekly-update.md),
+the copy Claude Code wrote,
 [`evidence/outputs/claude-code/weekly-update.50per.md`](evidence/outputs/claude-code/weekly-update.50per.md),
 and the prompt in its
 [transcript](evidence/transcripts/claude-code-invocation.txt).
@@ -47,9 +47,9 @@ script, not the agent, ran the verifier for the last line.
 - Both runs also deleted text the skill says to keep. Both
   dropped the closing sign-off; Claude Code dropped the
   sentence "Honestly, we, uh, we just do not know yet." and
-  Codex dropped "this week". Claude Code's report names
-  both of its cuts and lists the "Honestly" sentence among
-  cuts to consider undoing; Codex's report names none.
+  Codex dropped "this week". Claude Code's report names both
+  of its cuts and lists the "Honestly" sentence among cuts
+  to consider undoing; Codex's report names none.
 - The verifier checks deletion shape and word count only. It
   cannot tell whether a deletion changed the meaning: a copy
   that drops "not" passes. The skill tells the agent to
@@ -106,13 +106,12 @@ python3 "$verifier" verify draft.txt draft.50per.txt --retain 0.5
 
 `verify` passes when the source has at least one word, the
 copy's tokens appear in the source in the same order,
-ignoring case, the copy has no more
-whitespace-separated words than the source, and it has at
-least the target number of them. It counts
-capitalization changes and lists up to ten. `--skip-budget`
-drops the target check, `--strict-case` fails on any
-capitalization change, and `--json` prints the report as
-JSON.
+ignoring case, the copy has no more whitespace-separated
+words than the source, and it has at least the target number
+of them. It counts capitalization changes and lists up to
+ten. `--skip-budget` drops the target check, `--strict-case`
+fails on any capitalization change, and `--json` prints the
+report as JSON.
 
 A token is a run of letters and digits, joined across an
 apostrophe inside a word, so `it's` and `rock'n'roll` are
@@ -166,7 +165,8 @@ Invoke it as `/mechanical-summarize`, for example:
 ```
 
 Installed as a plugin from a marketplace that lists it, such
-as [trycopilotai/skills](https://github.com/trycopilotai/skills),
+as
+[trycopilotai/skills](https://github.com/trycopilotai/skills),
 the skill is namespaced:
 `/mechanical-summarize:mechanical-summarize`.
 
@@ -206,12 +206,11 @@ Invoke it as `$mechanical-summarize`.
 
 Installed as a plugin from a Codex marketplace that lists
 it, invoke it as
-`$mechanical-summarize:mechanical-summarize`. With the
-skill installed only as a plugin and `codex exec`
-0.163.0, neither `$mechanical-summarize` nor an
-`@mechanical-summarize` mention loaded the skill, and the
-namespaced form loaded nothing before the plugin was
-installed; see
+`$mechanical-summarize:mechanical-summarize`. With the skill
+installed only as a plugin and `codex exec` 0.163.0, neither
+`$mechanical-summarize` nor an `@mechanical-summarize`
+mention loaded the skill, and the namespaced form loaded
+nothing before the plugin was installed; see
 [`evidence/codex-plugin-forms/`](evidence/codex-plugin-forms/).
 The trycopilotai/skills marketplace requires a plugin's
 default prompt to match its `agents/openai.yaml`, so a
@@ -245,14 +244,14 @@ called another skill, plugin, or connector. Neither run
 changed the source, and each added one file, the copy, to
 its run directory.
 
-| Run | Unit | Original | Target floor | Final | Retained |
-| --- | --- | ---: | ---: | ---: | ---: |
-| Claude Code | What changed | 121 | 61 | 75 | 62.0% |
-| Claude Code | What is next | 120 | 60 | 76 | 63.3% |
-| Claude Code | Both units | 241 | 121 | 151 | 62.7% |
-| Codex | What changed | 121 | 61 | 80 | 66.1% |
-| Codex | What is next | 120 | 60 | 104 | 86.7% |
-| Codex | Both units | 241 | 121 | 184 | 76.3% |
+| Run         | Unit         | Original | Target floor | Final | Retained |
+| ----------- | ------------ | -------: | -----------: | ----: | -------: |
+| Claude Code | What changed |      121 |           61 |    75 |    62.0% |
+| Claude Code | What is next |      120 |           60 |    76 |    63.3% |
+| Claude Code | Both units   |      241 |          121 |   151 |    62.7% |
+| Codex       | What changed |      121 |           61 |    80 |    66.1% |
+| Codex       | What is next |      120 |           60 |   104 |    86.7% |
+| Codex       | Both units   |      241 |          121 |   184 |    76.3% |
 
 The counts are the verifier's, recomputed by `make check`
 from the committed files.
@@ -277,13 +276,12 @@ from the committed files.
 - [`codex-invocation.txt`](evidence/transcripts/codex-invocation.txt):
   Codex CLI 0.163.0 ran `$mechanical-summarize` with
   `-s workspace-write`; its event stream does not name the
-  model. It read the skill and the
-  verifier, wrote each section to a temporary directory from
-  Python's `tempfile`, wrote the copy with a Python script,
-  verified each section and the whole file, asserted that
-  the source bytes and headings were unchanged, and then
-  deleted the directory and a pointer file it had left in
-  `/tmp`.
+  model. It read the skill and the verifier, wrote each
+  section to a temporary directory from Python's `tempfile`,
+  wrote the copy with a Python script, verified each section
+  and the whole file, asserted that the source bytes and
+  headings were unchanged, and then deleted the directory
+  and a pointer file it had left in `/tmp`.
 
 The copies are byte for byte what each client wrote:
 [Claude Code](evidence/outputs/claude-code/weekly-update.50per.md)
@@ -296,10 +294,9 @@ rendered both transcripts from the clients' raw output,
 which is not committed, and from each run's prompt file,
 which the raw output does not echo. They show the prompt,
 every tool call with each argument cut at 4000 characters
-and each result at 1500, and the final message; the
-agents' messages between tool calls are left out. The only
-edits are the replacements
-listed per run in
+and each result at 1500, and the final message; the agents'
+messages between tool calls are left out. The only edits are
+the replacements listed per run in
 [`evidence/manifest.json`](evidence/manifest.json), which
 also records every hash.
 
@@ -315,13 +312,12 @@ evidence, and the images to each other.
   do.
 - Only tokens are compared with the source. A copy can add
   `$`, `+`, `>`, or `-` beside or between kept words and
-  still pass, even where that changes the meaning, and
-  words made only of such characters, such as `-` or `...`,
-  count toward the target, so padding a copy with them
-  passes.
-- A contraction or possessive is one token, so a copy
-  cannot cut `it's` to `it` or `team's` to `team`, and a
-  straight apostrophe does not match a curly one.
+  still pass, even where that changes the meaning, and words
+  made only of such characters, such as `-` or `...`, count
+  toward the target, so padding a copy with them passes.
+- A contraction or possessive is one token, so a copy cannot
+  cut `it's` to `it` or `team's` to `team`, and a straight
+  apostrophe does not match a curly one.
 - Capitalization changes pass by default; both runs
   capitalized words that now start a sentence. Use
   `--strict-case` when terms must keep their case.
@@ -353,6 +349,6 @@ MIT. See [`LICENSE`](LICENSE).
 This project is not affiliated with, endorsed by, or
 sponsored by Anthropic, OpenAI, Microsoft, or GitHub.
 Neither the `trycopilotai` organization name nor the name
-trycopilot.ai LLC is a claim of any relationship with
-GitHub Copilot or Microsoft Copilot.
-Product names are trademarks of their owners.
+trycopilot.ai LLC is a claim of any relationship with GitHub
+Copilot or Microsoft Copilot. Product names are trademarks
+of their owners.

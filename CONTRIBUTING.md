@@ -12,11 +12,11 @@ make check
 
 That runs `tests/test_verify_reduction.py`,
 `tests/test_verify_cli.py`, and
-`tests/test_integrations.py`.
-They need `make`, Python 3.9 or later, and `git`; no Python
-package is installed. The packaging contract needs a git
-clone, because it reads `git log`; its release-tag test
-skips when `HEAD` carries no tag.
+`tests/test_integrations.py`. They need `make`, Python 3.9
+or later, and `git`; no Python package is installed. The
+packaging contract needs a git clone, because it reads
+`git log`; its release-tag test skips when `HEAD` carries no
+tag.
 
 **The packaging contract asserts on the README.** These fail
 on an innocent-looking prose edit:
@@ -36,8 +36,8 @@ on an innocent-looking prose edit:
   `description` as its only frontmatter keys, and keep its
   three `python3 <skill-dir>/scripts/verify_reduction.py`
   command lines (change the test if you add one);
-- both Codex default prompts must name their invocation
-  form and stay within 128 characters;
+- both Codex default prompts must name their invocation form
+  and stay within 128 characters;
 - `SECURITY.md` must keep its advisory link, this file must
   mention `make check`, and `LICENSE` must start with
   `MIT License`;
