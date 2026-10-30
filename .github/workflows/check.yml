@@ -27,5 +27,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       # Every suite uses the Python standard library only.
-      - name: Run the verifier tests and the packaging contract
+      - name:
+          Run the verifier tests and the packaging contract
         run: make check
