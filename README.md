@@ -2,9 +2,13 @@
 
 Shorten prose to a word budget by deleting, never rewriting.
 
+---
+
 [![auto-lint-pr](https://github.com/trycopilotai/mechanical-summarize/actions/workflows/auto-lint-pr.yml/badge.svg)](https://github.com/trycopilotai/mechanical-summarize/actions/workflows/auto-lint-pr.yml)
 [![check](https://github.com/trycopilotai/mechanical-summarize/actions/workflows/check.yml/badge.svg)](https://github.com/trycopilotai/mechanical-summarize/actions/workflows/check.yml)
 [![lint](https://github.com/trycopilotai/mechanical-summarize/actions/workflows/lint.yml/badge.svg)](https://github.com/trycopilotai/mechanical-summarize/actions/workflows/lint.yml)
+
+---
 
 An agent skill for Claude Code and Codex that shortens a
 document by deleting words from it. What is left keeps the
